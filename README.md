@@ -51,7 +51,7 @@ legixo-case-module/
 
 ```bash
 cd backend
-cp  .env          # edit if your Mongo URI differs
+cp .env.example .env          # edit if your Mongo URI differs
 npm install
 npm run dev                   # starts on http://localhost:5000
 ```
@@ -71,7 +71,7 @@ GraphiQL playground: `http://localhost:5000/graphql`
 
 ```bash
 cd frontend
-cp .env
+cp .env.example .env
 npm install
 npm run dev                   # starts on http://localhost:5173
 ```
