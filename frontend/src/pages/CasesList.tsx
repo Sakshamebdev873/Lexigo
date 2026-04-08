@@ -63,35 +63,58 @@ export default function CasesList() {
       {/* Modern Filter Section */}
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm space-y-4">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
-          <div className="lg:col-span-2">
-            <input
-              className="w-full rounded-lg border border-slate-200 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50/50 transition-all outline-none"
-              placeholder="Search by title or client…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <select 
-            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-indigo-500 outline-none cursor-pointer"
-            value={stage} 
-            onChange={(e) => setStage(e.target.value)}
-          >
-            <option value="">All stages</option>
-            {CASE_STAGES.map((s) => <option key={s} value={s}>{s}</option>)}
-          </select>
-          <input 
-            type="date" 
-            className="rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-indigo-500 outline-none"
-            value={fromDate} 
-            onChange={(e) => setFromDate(e.target.value)} 
-          />
-          <input 
-            type="date" 
-            className="rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-indigo-500 outline-none"
-            value={toDate} 
-            onChange={(e) => setToDate(e.target.value)} 
-          />
-        </div>
+  <div className="lg:col-span-2">
+    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+      Search
+    </label>
+    <input
+      className="w-full rounded-lg border border-slate-200 px-4 py-2 text-sm focus:border-indigo-500 focus:ring-4 focus:ring-indigo-50/50 transition-all outline-none"
+      placeholder="Search by title or client…"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+    />
+  </div>
+
+  <div>
+    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+      Stage
+    </label>
+    <select
+      className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm focus:border-indigo-500 outline-none cursor-pointer"
+      value={stage}
+      onChange={(e) => setStage(e.target.value)}
+    >
+      <option value="">All stages</option>
+      {CASE_STAGES.map((s) => <option key={s} value={s}>{s}</option>)}
+    </select>
+  </div>
+
+  <div>
+    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+      Hearing From
+    </label>
+    <input
+      type="date"
+      className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-indigo-500 outline-none"
+      value={fromDate}
+      onChange={(e) => setFromDate(e.target.value)}
+      title="Show cases with next hearing on or after this date"
+    />
+  </div>
+
+  <div>
+    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
+      Hearing To
+    </label>
+    <input
+      type="date"
+      className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-indigo-500 outline-none"
+      value={toDate}
+      onChange={(e) => setToDate(e.target.value)}
+      title="Show cases with next hearing on or before this date"
+    />
+  </div>
+</div>
         <div className="flex justify-end border-t border-slate-100 pt-3">
           <button 
             className="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-indigo-600 transition-colors"

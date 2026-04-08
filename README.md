@@ -43,7 +43,7 @@ legixo-case-module/
 ## Prerequisites
 
 - Node.js 18+
-- MongoDB running locally (or a connection string to a remote instance)
+- MongoDB running to a remote instance
 
 ## Setup & Run
 
