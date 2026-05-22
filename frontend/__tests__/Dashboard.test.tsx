@@ -25,9 +25,17 @@ describe('Dashboard', () => {
         <Dashboard />
       </MemoryRouter>
     );
-    expect(await screen.findByText('7')).toBeInTheDocument();
+
+    expect(await screen.findByText('Active Cases')).toBeInTheDocument();
+    expect(screen.getByText('Upcoming Hearings')).toBeInTheDocument();
+    expect(screen.getByText('Pending Tasks')).toBeInTheDocument();
+    expect(screen.getByText('Task Completion')).toBeInTheDocument();
+
+    expect(screen.getByText('7')).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
     expect(screen.getByText('5')).toBeInTheDocument();
-    expect(screen.getByText('3')).toBeInTheDocument();
+    expect(screen.getByText('38%')).toBeInTheDocument();
+    expect(screen.getByText('38% Complete')).toBeInTheDocument();
+    expect(screen.getByText(/3 out of 8 key tasks/i)).toBeInTheDocument();
   });
 });

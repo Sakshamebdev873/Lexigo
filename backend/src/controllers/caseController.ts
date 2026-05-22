@@ -5,8 +5,9 @@ import { caseSchema } from '../middleware/validation';
 import { HttpError } from '../middleware/error';
 import { isValidObjectId } from 'mongoose';
 
-const ensureId = (id: string) => {
-  if (!isValidObjectId(id)) throw new HttpError(400, 'Invalid id');
+const ensureId = (id: unknown): string => {
+  if (typeof id !== 'string' || !isValidObjectId(id)) throw new HttpError(400, 'Invalid id');
+  return id;
 };
 
 export const createCase = async (req: Request, res: Response, next: NextFunction) => {
@@ -39,8 +40,8 @@ export const listCases = async (req: Request, res: Response, next: NextFunction)
 
 export const getCase = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    ensureId(req.params.id);
-    const c = await CaseModel.findById(req.params.id);
+    const id = ensureId(req.params.id);
+    const c = await CaseModel.findById(id);
     if (!c) throw new HttpError(404, 'Case not found');
     res.json(c);
   } catch (e) { next(e); }
@@ -48,10 +49,10 @@ export const getCase = async (req: Request, res: Response, next: NextFunction) =
 
 export const updateCase = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    ensureId(req.params.id);
+    const id = ensureId(req.params.id);
     const parsed = caseSchema.partial().safeParse(req.body);
     if (!parsed.success) throw new HttpError(400, 'Validation failed', parsed.error.flatten());
-    const updated = await CaseModel.findByIdAndUpdate(req.params.id, parsed.data, { new: true, runValidators: true });
+    const updated = await CaseModel.findByIdAndUpdate(id, parsed.data, { new: true, runValidators: true });
     if (!updated) throw new HttpError(404, 'Case not found');
     res.json(updated);
   } catch (e) { next(e); }
@@ -59,8 +60,8 @@ export const updateCase = async (req: Request, res: Response, next: NextFunction
 
 export const deleteCase = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    ensureId(req.params.id);
-    const c = await CaseModel.findById(req.params.id);
+    const id = ensureId(req.params.id);
+    const c = await CaseModel.findById(id);
     if (!c) throw new HttpError(404, 'Case not found');
     // Cascade delete dependent tasks
     await TaskModel.deleteMany({ caseId: c._id });

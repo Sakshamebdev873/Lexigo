@@ -42,7 +42,7 @@ legixo-case-module/
 
 ## Prerequisites
 
-- Node.js 18+
+- Node.js 20+
 - MongoDB running to a remote instance
 
 ## Setup & Run
@@ -176,3 +176,4 @@ using REST, so both transports are exercised in real flows.
 | Tests          | `backend/__tests__/cases.test.ts`, `frontend/__tests__/Dashboard.test.tsx` |
 | AI usage log   | `AI_USAGE.md`                                                      |
 | UX polish      | `frontend/src/index.css`, loading/empty states across pages        |
+

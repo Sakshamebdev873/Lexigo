@@ -1,8 +1,6 @@
 import request from 'supertest';
 import { buildApp } from '../src/app';
 
-// Note: this test does not connect to MongoDB; it verifies validation behavior on the route layer.
-// For a full integration test, use mongodb-memory-server.
 
 describe('POST /api/cases validation', () => {
   const app = buildApp();
